@@ -31,20 +31,115 @@ p.inProgress {
 }
 /* Estilos para aboutMe */
 
-img.aboutMe {
+#escritorio {
     height: 60vh;
     height: 60dvh;
-    align-content: center;
-}
-p.description{
-    background-color: rgba(5, 5, 5, 0.2); 
-    font-size: 20px;
-    color: white
+    align-items: center;
 }
 
+.historia-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .historia-dialog-box {
+    background-color: #2c2c2c;
+    border: 4px solid #888;
+    border-radius: 8px;
+    padding: 15px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .historia-text-content {
+    height: 100%;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding-right: 10px;
+    color: #f0f0f0;
+  }
+
+  .historia-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .historia-buttons button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+  }
+
+  @media (max-width: 600px) {
+    .historia-dialog-box {
+      height: 150px;
+    }
+
+    .historia-buttons button {
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+  }
 
 
 /* Estilos para projects */
+#listaProyectos {
+  max-height: 400px; /* altura fija o máxima */
+  overflow-y: auto;  /* agrega barra scroll vertical si es necesario */
+  padding-right: 10px; /* para evitar que el scroll tape el contenido */
+}
+.Proyecto {
+  background-color: #e9ecef; /* o cualquier color que quieras */
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px; /* espacio vertical */
+}
+
+/* Input y botón borrar contenedor */
+#projects {
+  position: relative;
+}
+
+/* Input ocupa el 100% menos el botón borrar */
+#busqueda {
+  width: 100%;
+  padding-right: 2.5rem; /* espacio para el botón borrar */
+  box-sizing: border-box;
+}
+
+/* Botón borrar posicion absoluto a la derecha dentro del contenedor */
+#borrar {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;         /* puedes ajustar esto */
+  background: transparent;
+  border: none;
+  color: #000;
+  display: none;             /* se muestra desde JS si hay texto */
+  z-index: 10;
+}
+
+/* Para que todo sea responsivo */
+@media (max-width: 768px) {
+  #busqueda {
+    font-size: 1rem;
+  }
+  #borrar {
+    font-size: 1.2rem;
+  }
+}
 
 /* Estilos para diseño resposivo */
 @media (max-width: 767.98px) {

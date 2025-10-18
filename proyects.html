@@ -31,14 +31,33 @@
                 </div>
             </div> 
         </nav>
-        <div class="row">
-        <div class="col-md-6 bg-dark bg-opacity-50">
-            Contenido de la primera columna
-        </div>
-        <div class="col-md-6">
-            Contenido de la segunda columna
-        </div>
+        <div class="row justify-content-center gap-5">
+            <div class="col-md-5 bg-secondary bg-opacity-50 rounded my-3">
+                <div id="projects"class="catalog">
+                    <h4 class="titulo-catalogo fw-bold ps-2 my-3">Proyectos</h4>
+                        <div class="position-relative">
+                            <input type="text" id="busqueda" class="form-control mb-3 pe-5" placeholder="Buscar por nombre, programa o módulo">
+                            <button id="borrar" type="button">&times;</button>
+                        </div>
+                        <p class="sinResultados ms-2" id="sinResultados"> No se encontraron resultados.</p>
+                    <div id="listaProyectos"></div> 
+                    <p class="text-end my-2" id="totalResultados"></p>
+                    <div class="text-end">
+                    <button id="verTodos" class="btn btn-outline-light btn-sm" style="display: none;">Ver todos</button>                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <img src="assets/img/escalera.png" usemap="#mapaEscalera" alt="Escalera interactiva" id="imagenEscalera" style="max-width: 100%; height: auto;">
+
+                <map name="mapaEscalera">
+                <area shape="rect" coords="180,480,400,500" href="#" data-modulo="Fundamentos del desarrollo Front-End" alt="Módulo 2">
+                <area shape="rect" coords="180,510,400,530" href="#" data-modulo="Fundamentos de programación en Python" alt="Módulo 3">
+                <area shape="rect" coords="180,540,400,560" href="#" data-modulo="Programación avanzada en Python" alt="Módulo 4">
+                </map>
+
+            </div>
         </div>
         <script src="scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
     </body>
 </html>
