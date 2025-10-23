@@ -31,9 +31,9 @@
                 </div>
             </div> 
         </nav>
-        <div class="row justify-content-center gap-5">
-            <div class="col-md-5 bg-secondary bg-opacity-50 rounded my-3">
-                <div id="projects"class="catalog">
+        <div class="row justify-content-center align-items-center style="height: 100dvh;">
+            <div class="col-lg-5 mb-3 mx-3">
+                <div id="projects"class="catalog bg-secondary bg-opacity-50 rounded p-3">
                     <h4 class="titulo-catalogo fw-bold ps-2 my-3">Proyectos</h4>
                         <div class="position-relative">
                             <input type="text" id="busqueda" class="form-control mb-3 pe-5" placeholder="Buscar por nombre, programa o módulo">
@@ -43,19 +43,13 @@
                     <div id="listaProyectos"></div> 
                     <p class="text-end my-2" id="totalResultados"></p>
                     <div class="text-end">
-                        <button id="verTodos" class="btn btn-outline-light btn-sm" style="display: none;">Ver todos los proyectos</button>                
+                        <button id="verTodos" class="btn btn-outline-light btn-sm">Ver todos los proyectos</button>                
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <img src="assets/img/escalera.png" usemap="#mapaEscalera" alt="Escalera interactiva" id="imagenEscalera" style="max-width: 100%; height: auto;">
-                <div id="hoverOverlay" style="
-                    position: absolute;
-                    pointer-events: none;
-                    background-color: rgba(255, 0, 0, 0.4); /* Color rojo semi-transparente */
-                    display: none;
-                    z-index: 2;
-                "></div>
+            <div class="col-lg-7 contenedor-imagen">
+                <img id="imagenEscalera" src="assets/img/escalera.png" usemap="#mapaEscalera" alt="Escalera interactiva">
+                <svg id="overlayMapa"></svg>
                 <map name="mapaEscalera">
                     <area id="modulo1" shape="poly" coords="434,906,1055,816,1055,856,434,952" href="#" data-modulo="Orientación al perfil y metodología del curso" alt="Piso base filtro de archivos Módulo 1">
                     <area id="modulo2" shape="poly" coords="319,823,519,794,519,833,319,862" href="#" data-modulo="Fundamentos del desarrollo Front-End" alt="Escalon filtro de archivos Módulo 2">
@@ -73,15 +67,8 @@
         <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
-        $(document).ready(function(){
-        $("#modulo2").hover(
-            function(){ // Función para cuando el ratón entra
-            $(this).css("background-color", "red"); // Cambia el color de fondo a rojo
-            },
-            function(){ // Función para cuando el ratón sale
-            $(this).css("background-color", "blue"); // Vuelve al color de fondo original (azul)
-            }
-        );
+        $(document).ready(function(){    
+            imageMapResize();
         });
         </script>
     </body>

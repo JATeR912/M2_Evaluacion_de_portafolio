@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalResultados = document.getElementById("totalResultados");
   const borrar = document.getElementById("borrar");
   const listaProyectos = document.getElementById("listaProyectos");
+  const verTodos = document.getElementById("verTodos");
 
+  // Función para mostrar proyectos
   const buscarProyectos = (archivo) => {
     listaProyectos.innerHTML = "";
     totalResultados.textContent = `Se encontraron ${archivo.length} proyecto(s).`;
@@ -55,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Función para búsqueda de texto
   const buscandoProyectos = () => {
     const searchTerm = busqueda.value.toLowerCase().trim();
     const filtrados = proyecto.filter(
@@ -66,104 +69,135 @@ document.addEventListener("DOMContentLoaded", () => {
     buscarProyectos(filtrados);
   };
 
-  // Mostrar todos al cargar
+  // Mostrar todos al cargar la página
   buscarProyectos(proyecto);
 
-  // Búsqueda por texto
+  // Inicialmente ocultar los botones borrar y verTodos
+  borrar.style.display = "none";
+  verTodos.style.display = "none";
+
+  // Evento input para búsqueda por texto
   busqueda.addEventListener("input", () => {
-    borrar.style.display = busqueda.value.trim() ? "inline-block" : "none";
+    const tieneTexto = busqueda.value.trim() !== "";
+
+    // Mostrar u ocultar botón borrar según si hay texto
+    borrar.style.display = tieneTexto ? "inline-block" : "none";
+
+    // Ocultar botón "verTodos" cuando se escribe en búsqueda
+    verTodos.style.display = "none";
+
+    // Ejecutar filtro por texto
     buscandoProyectos();
   });
 
-  // Botón de borrar
+  // Botón borrar para limpiar búsqueda
   borrar.addEventListener("click", () => {
     busqueda.value = "";
     borrar.style.display = "none";
+
+    // Ocultar botón "verTodos" al borrar
+    verTodos.style.display = "none";
+
+    // Mostrar todos los proyectos
     buscarProyectos(proyecto);
   });
 
-  // Filtro por zonas de imagen (áreas del mapa)
+  // Eventos para áreas del mapa - filtro por modulo
   document.querySelectorAll("area").forEach((area) => {
     area.addEventListener("click", (e) => {
       e.preventDefault();
       const moduloSeleccionado = area.dataset.modulo;
+
+      // Filtrar proyectos según módulo seleccionado
       const filtrados = proyecto.filter(
         (p) => p.modulo === moduloSeleccionado
       );
+
       buscarProyectos(filtrados);
+
+      // Mostrar botón "verTodos" SOLO cuando se filtra por mapa
+      verTodos.style.display = "inline-block";
+
+      // Limpiar campo de búsqueda y ocultar botón borrar
+      busqueda.value = "";
+      borrar.style.display = "none";
     });
   });
 
-  // Ajuste automático del mapa
-  imageMapResize();
+  // Botón "Ver todos" para mostrar todos los proyectos
+  verTodos.addEventListener("click", () => {
+    buscarProyectos(proyecto);
+
+    // Limpiar campo de búsqueda
+    busqueda.value = "";
+
+    // Ocultar botones borrar y verTodos
+    borrar.style.display = "none";
+    verTodos.style.display = "none";
+
+    sinResultados.style.display = "none";
+  });
+
+  // Ajuste automático del mapa para que quede responsivo
+  window.addEventListener('load', () => {
+    if(typeof imageMapResize === "function"){
+      imageMapResize();
+    }
+  });
 });
 
-const verTodos = document.getElementById("verTodos");
 
-busqueda.addEventListener("input", () => {
-  const tieneTexto = busqueda.value.trim() !== "";
-  borrar.style.display = tieneTexto ? "inline-block" : "none";
-  verTodos.style.display = tieneTexto ? "inline-block" : "none";  // Mostrar solo si hay texto
-  buscandoProyectos();
-});
-
-// También ocultarlo al borrar
-borrar.addEventListener("click", () => {
-  busqueda.value = "";
-  borrar.style.display = "none";
-  verTodos.style.display = "none";
-  buscarProyectos(proyecto);
-});
-
-// Botón "ver todos"
-verTodos.addEventListener("click", () => {
-  busqueda.value = "";
-  borrar.style.display = "none";
-  verTodos.style.display = "none";
-  sinResultados.style.display = "none";
-  buscarProyectos(proyecto);
-});
-
-// Función para mostrar el overlay en escalones
+// Función para mostrar svg color escalones
 document.addEventListener("DOMContentLoaded", function() {
-  const overlay = document.getElementById("hoverOverlay");
+  const svgOverlay = document.getElementById("overlayMapa");
   const imagen = document.getElementById("imagenEscalera");
+  const areas = document.querySelectorAll("area");
 
-  // Función para mostrar el overlay
-  function mostrarOverlay(area) {
-    const coords = area.coords.split(",").map(Number);
-    const xMin = Math.min(...coords.filter((_, i) => i % 2 === 0));
-    const yMin = Math.min(...coords.filter((_, i) => i % 2 !== 0));
-    const xMax = Math.max(...coords.filter((_, i) => i % 2 === 0));
-    const yMax = Math.max(...coords.filter((_, i) => i % 2 !== 0));
+  const colores = {
+     "Orientación al perfil y metodología del curso": "rgba(255, 99, 71, 0.35)",
+    "Fundamentos del desarrollo Front-End": "rgba(255, 165, 0, 0.35)",
+    "Fundamentos de programación en Python": "rgba(255, 215, 0, 0.35)",
+    "Programación avanzada en Python": "rgba(144, 238, 144, 0.35)",
+    "Fundamentos de bases de datos relacionales": "rgba(173, 216, 230, 0.35)",
+    "Desarrollo de aplicaciones web con Python y Django": "rgba(186, 85, 211, 0.35)",
+    "Acceso a datos en aplicaciones Python y Django": "rgba(255, 182, 193, 0.35)",
+    "Desarrollo de portafolio de un producto digital": "rgba(135, 206, 250, 0.35)",
+    "Desarrollo de empleabilidad en la industria digital": "rgba(255, 228, 181, 0.35)"
+  };
 
-    const rect = imagen.getBoundingClientRect();
+function ajustarTamañoSVG() {
+  const imagen = document.getElementById("imagenEscalera");
+  const svgOverlay = document.getElementById("overlayMapa");
+  const rect = imagen.getBoundingClientRect();
+  svgOverlay.setAttribute("width", rect.width);
+  svgOverlay.setAttribute("height", rect.height);
+}
 
-    overlay.style.left = rect.left + xMin + "px";
-    overlay.style.top = rect.top + yMin + "px";
-    overlay.style.width = xMax - xMin + "px";
-    overlay.style.height = yMax - yMin + "px";
-    overlay.style.display = "block";
+window.addEventListener("resize", ajustarTamañoSVG);
+document.getElementById("imagenEscalera").addEventListener("load", ajustarTamañoSVG);
+ajustarTamañoSVG();
 
-    // Mostrar el nombre del módulo
-    const modulo = area.dataset.modulo;
-    overlay.textContent = modulo;
-    overlay.style.color = "white";
-    overlay.style.fontWeight = "bold";
-    overlay.style.textAlign = "center";
-    overlay.style.lineHeight = (yMax - yMin) + "px";
-  }
+  areas.forEach(area => {
+    area.addEventListener("mouseenter", () => {
+      const coords = area.coords.split(",").map(Number);
+      const puntos = [];
+      for (let i = 0; i < coords.length; i += 2) {
+        puntos.push(coords[i] + "," + coords[i + 1]);
+      }
 
-  // Función para ocultar el overlay
-  function ocultarOverlay() {
-    overlay.style.display = "none";
-    overlay.textContent = "";
-  }
+      const color = colores[area.dataset.modulo] || "rgba(255,0,0,0.35)";
+      svgOverlay.innerHTML = `
+        <polygon points="${puntos.join(" ")}"
+                 fill="${color}"
+                 stroke="red"
+                 stroke-width="2">
+        </polygon>
+      `;
+    });
 
-  // Aplicar eventos hover a cada área
-  document.querySelectorAll("area").forEach((area) => {
-    area.addEventListener("mouseenter", () => mostrarOverlay(area));
-    area.addEventListener("mouseleave", ocultarOverlay);
+    area.addEventListener("mouseleave", () => {
+      svgOverlay.innerHTML = "";
+    });
   });
 });
 
