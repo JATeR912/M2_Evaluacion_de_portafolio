@@ -98,11 +98,73 @@ document.addEventListener("DOMContentLoaded", () => {
   imageMapResize();
 });
 
-document.getElementById("verTodos").addEventListener("click", () => {
-  busqueda.value = "";                          // limpia el input
-  borrar.style.display = "none";               // oculta la X
-  sinResultados.style.display = "none";        // oculta mensaje de no resultados
-  buscarProyectos(proyecto);                   // muestra todos
+const verTodos = document.getElementById("verTodos");
+
+busqueda.addEventListener("input", () => {
+  const tieneTexto = busqueda.value.trim() !== "";
+  borrar.style.display = tieneTexto ? "inline-block" : "none";
+  verTodos.style.display = tieneTexto ? "inline-block" : "none";  // Mostrar solo si hay texto
+  buscandoProyectos();
+});
+
+// También ocultarlo al borrar
+borrar.addEventListener("click", () => {
+  busqueda.value = "";
+  borrar.style.display = "none";
+  verTodos.style.display = "none";
+  buscarProyectos(proyecto);
+});
+
+// Botón "ver todos"
+verTodos.addEventListener("click", () => {
+  busqueda.value = "";
+  borrar.style.display = "none";
+  verTodos.style.display = "none";
+  sinResultados.style.display = "none";
+  buscarProyectos(proyecto);
+});
+
+// Función para mostrar el overlay en escalones
+document.addEventListener("DOMContentLoaded", function() {
+  const overlay = document.getElementById("hoverOverlay");
+  const imagen = document.getElementById("imagenEscalera");
+
+  // Función para mostrar el overlay
+  function mostrarOverlay(area) {
+    const coords = area.coords.split(",").map(Number);
+    const xMin = Math.min(...coords.filter((_, i) => i % 2 === 0));
+    const yMin = Math.min(...coords.filter((_, i) => i % 2 !== 0));
+    const xMax = Math.max(...coords.filter((_, i) => i % 2 === 0));
+    const yMax = Math.max(...coords.filter((_, i) => i % 2 !== 0));
+
+    const rect = imagen.getBoundingClientRect();
+
+    overlay.style.left = rect.left + xMin + "px";
+    overlay.style.top = rect.top + yMin + "px";
+    overlay.style.width = xMax - xMin + "px";
+    overlay.style.height = yMax - yMin + "px";
+    overlay.style.display = "block";
+
+    // Mostrar el nombre del módulo
+    const modulo = area.dataset.modulo;
+    overlay.textContent = modulo;
+    overlay.style.color = "white";
+    overlay.style.fontWeight = "bold";
+    overlay.style.textAlign = "center";
+    overlay.style.lineHeight = (yMax - yMin) + "px";
+  }
+
+  // Función para ocultar el overlay
+  function ocultarOverlay() {
+    overlay.style.display = "none";
+    overlay.textContent = "";
+  }
+
+  // Aplicar eventos hover a cada área
+  document.querySelectorAll("area").forEach((area) => {
+    area.addEventListener("mouseenter", () => mostrarOverlay(area));
+    area.addEventListener("mouseleave", ocultarOverlay);
+  });
 });
 
 /// Gracias por venir, bueno mi nombre es Johana Torres y estoy trabajando para ser desarrolladora web full stack.

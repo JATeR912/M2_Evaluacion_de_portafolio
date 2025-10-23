@@ -43,21 +43,46 @@
                     <div id="listaProyectos"></div> 
                     <p class="text-end my-2" id="totalResultados"></p>
                     <div class="text-end">
-                    <button id="verTodos" class="btn btn-outline-light btn-sm" style="display: none;">Ver todos</button>                    </div>
+                        <button id="verTodos" class="btn btn-outline-light btn-sm" style="display: none;">Ver todos los proyectos</button>                
+                    </div>
                 </div>
             </div>
             <div class="col-md-5">
                 <img src="assets/img/escalera.png" usemap="#mapaEscalera" alt="Escalera interactiva" id="imagenEscalera" style="max-width: 100%; height: auto;">
-
+                <div id="hoverOverlay" style="
+                    position: absolute;
+                    pointer-events: none;
+                    background-color: rgba(255, 0, 0, 0.4); /* Color rojo semi-transparente */
+                    display: none;
+                    z-index: 2;
+                "></div>
                 <map name="mapaEscalera">
-                <area shape="rect" coords="180,480,400,500" href="#" data-modulo="Fundamentos del desarrollo Front-End" alt="Módulo 2">
-                <area shape="rect" coords="180,510,400,530" href="#" data-modulo="Fundamentos de programación en Python" alt="Módulo 3">
-                <area shape="rect" coords="180,540,400,560" href="#" data-modulo="Programación avanzada en Python" alt="Módulo 4">
+                    <area id="modulo1" shape="poly" coords="434,906,1055,816,1055,856,434,952" href="#" data-modulo="Orientación al perfil y metodología del curso" alt="Piso base filtro de archivos Módulo 1">
+                    <area id="modulo2" shape="poly" coords="319,823,519,794,519,833,319,862" href="#" data-modulo="Fundamentos del desarrollo Front-End" alt="Escalon filtro de archivos Módulo 2">
+                    <area id="modulo3" shape="poly" coords="282,770,482,740,482,777,282,809" href="#" data-modulo="Fundamentos de programación en Python" alt="Escalon filtro de archivos Módulo 3">
+                    <area id="modulo4" shape="poly" coords="242,714,442,689,442,724,242,753" href="#" data-modulo="Programación avanzada en Python" alt="Escalon filtro de archivos Módulo 4">
+                    <area id="modulo5" shape="poly" coords="200,660,402,632,402,670,200,700" href="#" data-modulo="Fundamentos de bases de datos relacionales" alt="Escalon filtro de archivos Módulo 5">
+                    <area id="modulo6" shape="poly" coords="164,606,367,578,367,615,164,648" href="#" data-modulo="Desarrollo de aplicaciones web con Python y Django" alt="Escalon filtro de archivos Módulo 6">
+                    <area id="modulo7" shape="poly" coords="245,491,368,542,368,582,245,532" href="#" data-modulo="Acceso a datos en aplicaciones Python y Django" alt="Escalon filtro de archivos Módulo 7">
+                    <area id="modulo8" shape="poly" coords="310,443,430,493,430,534,310,486" href="#" data-modulo="Desarrollo de portafolio de un producto digital" alt="Escalon filtro de archivos Módulo 8">
+                    <area id="modulo9" shape="poly" coords="376,396,500,447,500,488,376,438" href="#" data-modulo="Desarrollo de empleabilidad en la industria digital" alt="Escalon filtro de archivos Módulo 9">
                 </map>
-
             </div>
         </div>
         <script src="scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+        $(document).ready(function(){
+        $("#modulo2").hover(
+            function(){ // Función para cuando el ratón entra
+            $(this).css("background-color", "red"); // Cambia el color de fondo a rojo
+            },
+            function(){ // Función para cuando el ratón sale
+            $(this).css("background-color", "blue"); // Vuelve al color de fondo original (azul)
+            }
+        );
+        });
+        </script>
     </body>
 </html>
