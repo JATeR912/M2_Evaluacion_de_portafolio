@@ -188,9 +188,7 @@ ajustarTamañoSVG();
       const color = colores[area.dataset.modulo] || "rgba(255,0,0,0.35)";
       svgOverlay.innerHTML = `
         <polygon points="${puntos.join(" ")}"
-                 fill="${color}"
-                 stroke="red"
-                 stroke-width="2">
+                 fill="${color}">
         </polygon>
       `;
     });
@@ -201,6 +199,23 @@ ajustarTamañoSVG();
   });
 });
 
+//Ventana AboutMe
+function actualizarCielo() {
+      const hora = new Date().getHours();
+      const ventanas = document.querySelectorAll('.ventana');
+      let color;
+
+      if (hora >= 6 && hora < 9) color = 'linear-gradient(to bottom, #FFD580, #FFFAE3)'; // Amanecer
+      else if (hora >= 9 && hora < 17) color = 'linear-gradient(to bottom, #87CEEB, #ffffff)'; // Día
+      else if (hora >= 17 && hora < 20) color = 'linear-gradient(to bottom, #FF8C00, #FFD580)'; // Atardecer
+      else color = 'linear-gradient(to bottom, #001848, #0A043C)'; // Noche
+
+      ventanas.forEach(v => v.style.background = color);
+    }
+
+    actualizarCielo();
+    setInterval(actualizarCielo, 60000);
+    
 /// Gracias por venir, bueno mi nombre es Johana Torres y estoy trabajando para ser desarrolladora web full stack.
                     
 //Me considero una persona un poco terca y autodidacta sobre todo cuando deseo aprender algo nuevo, como por ejemplo... programación. 
