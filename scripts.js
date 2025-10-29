@@ -239,43 +239,74 @@ svg.prepend(defs);
 actualizarCielo();
 setInterval(actualizarCielo, 60000);
 
-/// Gracias por venir, bueno mi nombre es Johana Torres y estoy trabajando para ser desarrolladora web full stack.
-                    
-//Me considero una persona un poco terca y autodidacta sobre todo cuando deseo aprender algo nuevo, como por ejemplo... programación. 
 
-//Ingrese a este bootcamp porque me pareció un buen paso para iniciar en este campo, y que de ser posible me gustaría fuera mi profesión algún día, no solo por el hecho de que el poder visualizar algo que creaste desde 0 me ha aparecido siempre una de las sensaciones más gratificantes del mundo, sino que también el tema de programar 
-                   // siempre ha llamado mi atención y después de meditarlo bastante, decidí postular y 
-                    //ahora estoy aquí, ahora solo queda ver hasta donde llegaré.
+//Me considero una persona un poco terca y autodidacta sobre todo cuando deseo aprender algo nuevo, como por ejemplo... programación. 
 
 //Caja de texto aboutMe
 
-document.addEventListener("DOMContentLoaded", function () {
-  const historiaTexto = `Hola!`;
+// === TEXTO DE NOVELA VISUAL ===
+const dialogText = document.getElementById('dialogText');
+const nextBtn = document.getElementById('nextBtn');
 
-  const historiaTextContainer = document.getElementById("historiaText");
+const textos = [
+  "Hola... Gracias por venir, mi nombre es Johana Torres. ¡Bienvenido a mi pequeño estudio pixelado!.",
+  "Aquí programo, sueño y tomo té mientras el cielo cambia... estoy trabajando para ser desarrolladora web full stack.",
+  "Actualmente ingrese a este bootcamp porque me pareció un buen paso para iniciar en este campo, y que de ser posible me gustaría fuera mi profesión algún día...",
+  "¿Algo más sobre mi?",
+  "Me encanta el diseño de todo tipo, el hecho de que el poder visualizar o tocar algo que creaste desde 0 me ha aparecido siempre una de las sensaciones más gratificantes del mundo",
+  "también el tema de programar siempre ha llamado mi atención y después de meditarlo bastante, decidí postular y ahora estoy aquí, ahora solo queda ver hasta donde llegaré...",
+  "¿Te gustaría saber algo más?...",
+  "Te recomiendo presionar alrededor de mi estudio... ",
+  "O puedes quedarte un rato y mirar cómo avanza el día.",
+  "Sigo trabajando... hasta otra.",
+  "...",
+];
 
+let indice = 0;
+let mostrando = false;
+
+function mostrarTextoGradualmente(texto, callback) {
+  mostrando = true;
+  dialogText.textContent = "";
   let i = 0;
-  const velocidad = 30; // milisegundos por letra
-
-  function escribirTexto() {
-    if (i < historiaTexto.length) {
-      historiaTextContainer.innerHTML += historiaTexto.charAt(i);
-      historiaTextContainer.scrollTop = historiaTextContainer.scrollHeight;
-      i++;
-      setTimeout(escribirTexto, velocidad);
+  const intervalo = setInterval(() => {
+    dialogText.textContent += texto[i];
+    i++;
+    if (i >= texto.length) {
+      clearInterval(intervalo);
+      mostrando = false;
+      if (callback) callback();
     }
-  }
+  }, 35);
+}
 
-  function scrollHistoria(cantidad) {
-    historiaTextContainer.scrollBy({
-      top: cantidad,
-      behavior: 'smooth'
+function siguienteTexto() {
+  if (mostrando) return;
+
+  if (indice < textos.length) {
+    mostrarTextoGradualmente(textos[indice]);
+    indice++;
+  } else {
+    // En lugar de "Fin del diálogo", mostramos un botón
+    dialogText.innerHTML = `
+      <div style="text-align:center;">
+        <button id="restartBtn" 
+        ">Reiniciar</button>
+      </div>
+    `;
+
+    // Reiniciar diálogo al hacer clic
+    const restartBtn = document.getElementById("restartBtn");
+    restartBtn.addEventListener("click", () => {
+      indice = 0;
+      siguienteTexto();
     });
   }
+}
 
-  // Iniciar animación al cargar
-  escribirTexto();
-
-  // Hacer la función global para que los botones la encuentren
-  window.scrollHistoria = scrollHistoria;
+nextBtn.addEventListener("click", siguienteTexto);
+window.addEventListener("keydown", e => {
+  if (e.code === "Space" || e.code === "Enter") siguienteTexto();
 });
+
+siguienteTexto();

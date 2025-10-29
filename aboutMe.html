@@ -31,34 +31,26 @@
             </div> 
         </nav>
             <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="svg-container">
-                        <svg id="escena" viewBox="0 0 1184 864" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                            <image href="assets/img/escritorio.png" width="1184" height="864" />
-                            <rect class="ventana" id="v1" x="103" y="13" width="85" height="123" rx="5" />
-                            <rect class="ventana" id="v2" x="210" y="13" width="97" height="123" rx="5" />
-                            <rect class="ventana" id="v3" x="333" y="13" width="100" height="123" rx="5" />
-                            <rect class="ventana" id="v4" x="455" y="13" width="85" height="123" rx="5" />
-                        </svg>
+               <section class="escena-pixel">
+                <div class="svg-container">
+                    <svg id="escena" viewBox="0 0 1184 864" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    <image href="assets/img/escritorio.png" width="1184" height="864" />
+                    <rect class="ventana" id="v1" x="103" y="13" width="85" height="123" rx="5" />
+                    <rect class="ventana" id="v2" x="210" y="13" width="97" height="123" rx="5" />
+                    <rect class="ventana" id="v3" x="333" y="13" width="100" height="123" rx="5" />
+                    <rect class="ventana" id="v4" x="455" y="13" width="85" height="123" rx="5" />
+                    </svg>
+                </div>
+
+                <div class="dialog-box">
+                    <div class="dialog-text" id="dialogText"></div>
+                    <div class="dialog-controls">
+                    <button id="nextBtn">►</button>
                     </div>
                 </div>
+                </section>
             </div>
-            <div class="container bg-dark bg-opacity-50 rounded">
-                <div class="row">
-                    <div class="col text-white p-3">
-                    contenido de la segunda fila
-                    <p>Hola! Gracias por venir, bueno mi nombre es Johana Torres y estoy trabajando para ser desarrolladora web full stack</p>
-                    <p>Me considero una persona un poco terca y autodidacta sobre todo cuando deseo 
-                    aprender algo nuevo, como por ejemplo... programación. 
-                    Ingrese a este bootcamp porque me pareció un buen paso para iniciar en este campo y 
-                    que de ser posible me gustaría fuera mi profesión algún día, no solo por el hecho de 
-                    que el poder visualizar algo que creaste desde 0 me ha aparecido siempre una de las 
-                    sensaciones más gratificantes del mundo, sino que también el tema de programar 
-                    siempre ha llamado mi atención y después de meditarlo bastante, decidí postular y 
-                    ahora estoy aquí, ahora solo queda ver hasta donde llegaré.</p>
-                </div>
-            </div>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>  
         <script src="scripts.js" async defer></script>
     </body>
