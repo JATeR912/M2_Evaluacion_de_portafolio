@@ -33,48 +33,26 @@ p.inProgress {
 }
 /* Estilos para aboutMe */
 
- .escritorio-container {
-    position: relative;
-    height: 60vh;          /* controla la altura del bloque */
-    aspect-ratio: 1184 / 864; /* mantiene proporción original */
+.svg-container {
+    width: auto;
+    height: 60vh;               /* 👈 Mantiene la proporción visual */
+    aspect-ratio: 1184 / 864;   /* 👈 Garantiza que no se deforme */
     margin: 0 auto;
     display: block;
     max-width: 100%;
     overflow: hidden;
   }
 
-  /* Imagen dentro del contenedor */
-  #escritorio {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+  /* SVG se ajusta al tamaño del contenedor */
+  svg {
     width: 100%;
-    object-fit: contain; /* mantiene proporción sin deformar */
+    height: 100%;
   }
 
-  /* Ventanas con cielo */
   .ventana {
-    position: absolute;
-    border-radius: 4px;
-    z-index: 1;
-    transition: background 2s ease;
+    transition: fill 2s ease;
   }
-
-  /* Coordenadas basadas en 1184x864 px */
-  .v1 { top: 1.5%; left: 8.7%; width: 7.2%; height: 14.2%; }
-  .v2 { top: 1.5%; left: 17.7%; width: 8.2%; height: 14.2%; }
-  .v3 { top: 1.5%; left: 28.1%; width: 8.5%; height: 14.2%; }
-  .v4 { top: 1.5%; left: 38.4%; width: 7.2%; height: 14.2%; }
-
-  .panel {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 0.5rem;
-    margin-top: 2rem;
-    padding: 1rem;
-  }
-
+  
 .historia-container {
     width: 100%;
     max-width: 600px;
