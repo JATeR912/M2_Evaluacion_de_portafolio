@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modulo: "Fundamentos del desarrollo Front-End",
       programa: "HTML, CSS y JavaScript",
       descripcion: "Pagina sobre ciber seguridad.",
-      url: "",
+      url: "https://github.com/JATeR912/M2_Evaluacion_de_modulo",
     },
     {
       id: 2,
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modulo: "Fundamentos de programación en Python",
       programa: "Python",
       descripcion: "Gestor de tareas que permite crear, editar y eliminar tareas.",
-      url: "",
+      url: "https://github.com/JATeR912/M3_Evaluacion_de_modulo",
     },
     {
       id: 3,
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modulo: "Programación avanzada en Python",
       programa: "Python",
       descripcion: "Gestor de biblioteca con manejo de inventario.",
-      url: "",
+      url: "https://github.com/JATeR912/M4_Evaluacion_de_modulo",
     },
   ];
 
@@ -250,13 +250,13 @@ const nextBtn = document.getElementById('nextBtn');
 
 const textos = [
   "Hola... Gracias por venir, mi nombre es Johana Torres. ¡Bienvenido a mi pequeño estudio pixelado!.",
-  "Aquí programo, sueño y tomo té mientras el cielo cambia... estoy trabajando para ser desarrolladora web full stack.",
+  "Aquí programo, pienso y tomo té mientras el cielo cambia... estoy trabajando para ser desarrolladora web full stack.",
   "Actualmente ingrese a este bootcamp porque me pareció un buen paso para iniciar en este campo, y que de ser posible me gustaría fuera mi profesión algún día...",
   "¿Algo más sobre mi?",
   "Me encanta el diseño de todo tipo, el hecho de que el poder visualizar o tocar algo que creaste desde 0 me ha aparecido siempre una de las sensaciones más gratificantes del mundo",
   "también el tema de programar siempre ha llamado mi atención y después de meditarlo bastante, decidí postular y ahora estoy aquí, ahora solo queda ver hasta donde llegaré...",
   "¿Te gustaría saber algo más?...",
-  "Te recomiendo presionar alrededor de mi estudio... ",
+  //"Te recomiendo presionar alrededor de mi estudio... ",
   "O puedes quedarte un rato y mirar cómo avanza el día.",
   "Sigo trabajando... hasta otra.",
   "...",
